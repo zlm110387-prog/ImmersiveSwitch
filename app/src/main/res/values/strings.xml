@@ -1,14 +1,22 @@
 <resources>
     <string name="app_name">ImmersiveSwitch</string>
-    <string name="hide">隐藏状态栏</string>
-    <string name="restore">恢复状态栏</string>
+    <string name="subtitle">一个简单、干净的状态栏开关</string>
+    <string name="shizuku_label">SHIZUKU</string>
+    <string name="switch_title">隐藏状态栏</string>
+    <string name="waiting_short">未连接 · 请先启动 Shizuku</string>
+    <string name="denied_short">等待授权</string>
+    <string name="ready_short">● 已连接，可以使用</string>
+    <string name="error_short">连接异常</string>
+    <string name="state_hidden">当前：状态栏已隐藏</string>
+    <string name="state_visible">当前：状态栏正在显示</string>
+    <string name="unavailable">当前不可用</string>
+    <string name="tap_hint">拨动开关即可切换</string>
+    <string name="permission_hint">启动并授权 Shizuku 后即可使用</string>
     <string name="waiting">Shizuku 未运行，请先启动 Shizuku。</string>
-    <string name="denied">Shizuku 正在运行，尚未授权。请允许本应用使用 Shizuku。</string>
-    <string name="ready">Shizuku 已授权，可以使用。</string>
     <string name="old_version">请安装 Shizuku 13 或更新版本。</string>
-    <string name="unsupported_version">当前 Shizuku 服务 API 暂不支持此命令通道。</string>
-    <string name="running">正在执行…</string>
-    <string name="hidden">状态栏已隐藏。</string>
-    <string name="restored">状态栏已恢复。</string>
+    <string name="unsupported_version">当前 Shizuku 服务 API 暂不支持</string>
+    <string name="running">正在切换…</string>
+    <string name="hidden">状态栏已隐藏</string>
+    <string name="restored">状态栏已恢复</string>
     <string name="failed">执行失败：%1$s</string>
 </resources>
