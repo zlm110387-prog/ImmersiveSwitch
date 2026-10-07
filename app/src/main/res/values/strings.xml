@@ -3,15 +3,12 @@
     <string name="hide">隐藏状态栏</string>
     <string name="restore">恢复状态栏</string>
     <string name="waiting">Shizuku 未运行，请先启动 Shizuku。</string>
-    <string name="denied">Shizuku 正在运行，尚未授权。请在 Shizuku 中允许本应用。</string>
-    <string name="connecting">Shizuku 已授权，正在连接命令服务…</string>
-    <string name="compatibility">Shizuku 已授权，命令服务连接失败，已切换兼容命令通道。</string>
-    <string name="connection_timeout">命令服务连接超时，请重新启动 Shizuku 后再打开应用。</string>
-    <string name="connection_failed">命令服务连接失败：%1$s。请重新启动 Shizuku 后再打开应用。</string>
-    <string name="ready">Shizuku 正在运行，已授权。</string>
+    <string name="denied">Shizuku 正在运行，尚未授权。请允许本应用使用 Shizuku。</string>
+    <string name="ready">Shizuku 已授权，可以使用。</string>
     <string name="old_version">请安装 Shizuku 13 或更新版本。</string>
+    <string name="unsupported_version">当前 Shizuku 服务 API 暂不支持此命令通道。</string>
     <string name="running">正在执行…</string>
-    <string name="hidden">隐藏命令已执行。</string>
-    <string name="restored">恢复命令已执行。</string>
+    <string name="hidden">状态栏已隐藏。</string>
+    <string name="restored">状态栏已恢复。</string>
     <string name="failed">执行失败：%1$s</string>
 </resources>
