@@ -15,6 +15,8 @@
 <string name="old_version">Shizuku 版本过旧，请更新后再试</string>
 <string name="unsupported_version">当前 Shizuku 服务 API 暂不支持</string>
 <string name="running">正在切换…</string>
+<string name="restoring">正在恢复上次状态…</string>
+<string name="restore_failed">恢复上次状态失败：%1$s</string>
 <string name="hidden">✓ 状态栏已隐藏</string>
 <string name="restored">✓ 状态栏已恢复</string>
 <string name="failed">执行失败：%1$s</string>
