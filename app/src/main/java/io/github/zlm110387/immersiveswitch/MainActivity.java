@@ -2,6 +2,7 @@ package io.github.zlm110387.immersiveswitch;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -24,9 +25,12 @@ public class MainActivity extends Activity {
     private TextView shizukuStatus, stateText, detail;
     private Switch toggle;
     private boolean busy, requested, suppressToggle, hidden;
+    private boolean restoredThisSession;
     private int primary, secondary, card;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private static final String PREFS = "immersive_switch";
+    private static final String PREF_HIDDEN = "hidden";
 
     private final Shizuku.OnBinderReceivedListener received = () -> runOnUiThread(() -> refresh(true));
     private final Shizuku.OnBinderDeadListener dead = () -> runOnUiThread(() -> refresh(false));
@@ -114,11 +118,26 @@ public class MainActivity extends Activity {
             else if(Shizuku.checkSelfPermission()!=PackageManager.PERMISSION_GRANTED){
                 shizukuStatus.setText(R.string.denied_short);
                 if(ask&&!requested&&!Shizuku.shouldShowRequestPermissionRationale()){requested=true;Shizuku.requestPermission(1);}
-            } else if(Shizuku.getVersion()==13){ready=true;shizukuStatus.setText(R.string.ready_short);detectState();}
+            } else if(Shizuku.getVersion()==13){ready=true;shizukuStatus.setText(R.string.ready_short);restoreOrDetectState();}
             else shizukuStatus.setText(R.string.unsupported_version);
         }catch(RuntimeException e){Log.e(TAG,"state",e);shizukuStatus.setText(R.string.error_short);}
         toggle.setEnabled(ready&&!busy);
         if(!ready){stateText.setText(R.string.unavailable);detail.setText(R.string.permission_hint);}
+    }
+
+    private void restoreOrDetectState(){
+        if(busy)return;
+        SharedPreferences prefs=getSharedPreferences(PREFS,MODE_PRIVATE);
+        if(!restoredThisSession && prefs.contains(PREF_HIDDEN)){
+            restoredThisSession=true;
+            boolean wanted=prefs.getBoolean(PREF_HIDDEN,false);
+            busy=true; toggle.setEnabled(false); stateText.setText(R.string.restoring); detail.setText("");
+            executor.execute(()->{String error;try{String o=ShizukuCommandCompat.setHidden(wanted);
+                error=o.startsWith("ERROR:")?o.substring(6):"";}catch(Exception e){Log.e(TAG,"restore",e);error=e.toString();}
+                String diag=error;handler.post(()->{if(isDestroyed())return;busy=false;
+                    if(diag.isEmpty())applyState(wanted,false);else{detail.setText(getString(R.string.restore_failed,diag));detectState();}
+                    toggle.setEnabled(true);});});
+        }else detectState();
     }
 
     private void detectState(){
@@ -136,7 +155,7 @@ public class MainActivity extends Activity {
         executor.execute(()->{String error;try{String o=ShizukuCommandCompat.setHidden(h);
             error=o.startsWith("ERROR:")?o.substring(6):"";}catch(Exception e){Log.e(TAG,"command",e);error=e.toString();}
             String diag=error;handler.post(()->{if(isDestroyed())return;busy=false;
-                if(diag.isEmpty())applyState(h,true);else{suppressToggle=true;toggle.setChecked(hidden);suppressToggle=false;detail.setText(getString(R.string.failed,diag));}
+                if(diag.isEmpty()){getSharedPreferences(PREFS,MODE_PRIVATE).edit().putBoolean(PREF_HIDDEN,h).apply();applyState(h,true);}else{suppressToggle=true;toggle.setChecked(hidden);suppressToggle=false;detail.setText(getString(R.string.failed,diag));}
                 refresh(false);});});
     }
     @Override protected void onDestroy(){
