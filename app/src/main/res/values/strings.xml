@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ImmersiveSwitch</string>
+    <string name="hide">隐藏状态栏</string>
+    <string name="restore">恢复状态栏</string>
+    <string name="waiting">Shizuku 未运行，请先启动 Shizuku。</string>
+    <string name="denied">Shizuku 正在运行，尚未授权。请在 Shizuku 中允许本应用。</string>
+    <string name="connecting">Shizuku 已授权，正在连接命令服务…</string>
+    <string name="ready">Shizuku 正在运行，已授权。</string>
+    <string name="old_version">请安装 Shizuku 13 或更新版本。</string>
+    <string name="running">正在执行…</string>
+    <string name="hidden">隐藏命令已执行。</string>
+    <string name="restored">恢复命令已执行。</string>
+    <string name="failed">执行失败：%1$s</string>
+</resources>
