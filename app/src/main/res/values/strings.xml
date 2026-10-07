@@ -5,6 +5,9 @@
     <string name="waiting">Shizuku 未运行，请先启动 Shizuku。</string>
     <string name="denied">Shizuku 正在运行，尚未授权。请在 Shizuku 中允许本应用。</string>
     <string name="connecting">Shizuku 已授权，正在连接命令服务…</string>
+    <string name="compatibility">Shizuku 已授权，命令服务连接失败，已切换兼容命令通道。</string>
+    <string name="connection_timeout">命令服务连接超时，请重新启动 Shizuku 后再打开应用。</string>
+    <string name="connection_failed">命令服务连接失败：%1$s。请重新启动 Shizuku 后再打开应用。</string>
     <string name="ready">Shizuku 正在运行，已授权。</string>
     <string name="old_version">请安装 Shizuku 13 或更新版本。</string>
     <string name="running">正在执行…</string>

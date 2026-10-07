@@ -17,6 +17,14 @@
 4. 若拒绝了权限，请在 Shizuku 的“已授权应用”中允许 ImmersiveSwitch，再返回应用。
 5. 如需恢复图标，请在退出应用前点击“恢复状态栏”。退出应用不会自动执行恢复命令。
 
+### 命令服务连接兼容处理
+
+应用优先使用 Shizuku UserService。每次连接前等待 2 秒，连接超时为 10 秒，最多尝试两次；失败后会清理旧回调与服务记录，避免一直停留在“正在连接命令服务”。
+
+在 Shizuku 服务端 API 13（包含 Shizuku 13.5）上，如果 UserService 仍无法连接，应用会显示“已切换兼容命令通道”，两个按钮可通过 Shizuku 服务端的旧版远程进程接口执行相同固定命令。这仍需要 Shizuku 授权和 ADB / shell 权限，不需要 Root，也不在应用本地启动 shell。该接口已被弃用，兼容通道仅用于 API 13，不会在 API 14 及以后调用。
+
+若兼容命令也失败，界面会显示具体错误。可收集日志中的 `ImmersiveSwitch`、`ShizukuServiceStarter`、`UserServiceManager` 和 `UserServiceRecord`，用于区分服务实例化失败和 Binder 回传失败。厂商系统的具体启动异常需要真机日志确认。
+
 隐藏时执行：
 
 ```sh

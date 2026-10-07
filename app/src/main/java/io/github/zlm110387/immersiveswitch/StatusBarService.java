@@ -7,7 +7,9 @@ import java.util.concurrent.TimeUnit;
 
 /** Runs in Shizuku's shell process, never in the unprivileged app process. */
 public class StatusBarService extends IStatusBarService.Stub {
-    public StatusBarService() {}
+    public StatusBarService() {
+        android.util.Log.i("ImmersiveSwitch", "UserService created, uid=" + android.os.Process.myUid());
+    }
 
     @Override public void destroy() { System.exit(0); }
 
