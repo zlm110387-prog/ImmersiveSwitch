@@ -1,10 +1,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:label="@string/app_name" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:allowBackup="false" android:supportsRtl="true">
-        <provider android:name="rikka.shizuku.ShizukuProvider"
+    <uses-permission android:name="moe.shizuku.manager.permission.API_V23" />
+    <application
+        android:theme="@style/AppTheme"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:allowBackup="false"
+        android:supportsRtl="true">
+        <provider
+            android:name="rikka.shizuku.ShizukuProvider"
             android:authorities="${applicationId}.shizuku"
-            android:multiprocess="false" android:enabled="true" android:exported="true"
-            android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
-        <activity android:name=".MainActivity" android:exported="true">
+            android:multiprocess="false"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.INTERACT_ACROSS_USERS_FULL">
+            <meta-data android:name="rikka.shizuku.provider.MANAGER_APPLICATION_ID" android:value="moe.shizuku.privileged.api" />
+        </provider>
+        <activity android:name=".MainActivity" android:screenOrientation="unspecified" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
